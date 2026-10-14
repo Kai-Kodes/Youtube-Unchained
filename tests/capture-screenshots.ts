@@ -102,6 +102,73 @@ async function captureAll() {
   console.log('Saved apple-narrow-viewport.png');
 
   await optPage.close();
+
+  // 10. In-player speed controller screenshots
+  const playerPage = await browser.newPage();
+  await playerPage.setViewport({ width: 1280, height: 800 });
+  await playerPage.setRequestInterception(true);
+  playerPage.on('request', (req) => {
+    try {
+      if (req.url().startsWith('https://www.youtube.com')) {
+        req.respond({
+          status: 200,
+          contentType: 'text/html; charset=utf-8',
+          body: `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube Watch Demo</title>
+  <style>
+    body { margin: 0; background: #0f0f0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    #player-wrap { width: 960px; }
+    #movie_player { position: relative; width: 960px; height: 540px; background: #1a1a1e; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.85); }
+    video { width: 100%; height: 100%; object-fit: cover; background: #121215; }
+    .ytp-chrome-bottom { position: absolute; bottom: 0; left: 0; width: 100%; height: 52px; background: linear-gradient(transparent, rgba(0,0,0,0.88)); display: flex; align-items: center; justify-content: flex-end; padding: 0 16px; box-sizing: border-box; }
+    .ytp-right-controls { display: flex; align-items: center; gap: 8px; }
+    .ytp-button { background: none; border: none; color: #fff; cursor: pointer; padding: 6px; font-size: 16px; display: inline-flex; align-items: center; justify-content: center; }
+  </style>
+</head>
+<body>
+  <div id="player-wrap">
+    <div id="movie_player" class="html5-video-player">
+      <video class="html5-main-video"></video>
+      <div class="ytp-chrome-bottom">
+        <div class="ytp-right-controls">
+          <button class="ytp-button ytp-settings-button" aria-label="Settings">⚙</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`
+        });
+      } else {
+        req.continue();
+      }
+    } catch {
+      // ignored
+    }
+  });
+
+  await playerPage.goto('https://www.youtube.com/watch?v=demo', { waitUntil: 'domcontentloaded' });
+  await new Promise(r => setTimeout(r, 600));
+
+  // Screenshot with speed button visible in player
+  await playerPage.screenshot({ path: path.join(outDir, 'in-player-speed-button.png') });
+  console.log('Saved in-player-speed-button.png');
+
+  // Open popover by clicking speed button
+  await playerPage.evaluate(() => {
+    const btn = document.querySelector('.ytp-unchained-speed-btn') as HTMLElement | null;
+    btn?.click();
+  });
+  await new Promise(r => setTimeout(r, 450));
+
+  // Screenshot with acrylic popover slider open
+  await playerPage.screenshot({ path: path.join(outDir, 'in-player-speed-popover.png') });
+  console.log('Saved in-player-speed-popover.png');
+
+  await playerPage.close();
   await browser.close();
   try {
     fs.rmSync(tmpDir, { recursive: true, force: true });

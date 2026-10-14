@@ -6,8 +6,8 @@
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-success.svg)](https://developer.chrome.com/docs/extensions/mv3/intro/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue.svg)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.3-61dafb.svg)](https://react.dev/)
-[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-64%20Passed-10b981.svg)](docs/testing.md)
-[![Browser Tests](https://img.shields.io/badge/Browser%20Tests-32%20Passed-10b981.svg)](docs/testing.md)
+[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-79%20Passed-10b981.svg)](docs/testing.md)
+[![Browser Tests](https://img.shields.io/badge/Browser%20Tests-38%20Passed-10b981.svg)](docs/testing.md)
 
 ---
 
@@ -17,7 +17,7 @@
 
 Modern YouTube is cluttered with algorithmic rabbit holes, auto-playing Shorts shelves, intrusive comment sections, promotional merchandise bars, and recommendation grids designed to maximize watch-time rather than user utility.
 
-**YouTube Unchained** is a lightweight, local-first browser extension that restores complete control of the YouTube interface to the user. It combines a declarative CSS rule engine with an interactive in-page element picker, customizable content filtering, layered ad blocking, full-range playback speed control, and six pre-configured viewing presets.
+**YouTube Unchained** is a lightweight, local-first browser extension that restores complete control of the YouTube interface to the user. It combines a declarative CSS rule engine with an interactive in-page element picker, customizable content filtering, layered ad blocking, in-player full-range playback speed control, and six pre-configured viewing presets.
 
 ---
 
@@ -34,11 +34,11 @@ Modern YouTube is cluttered with algorithmic rabbit holes, auto-playing Shorts s
 * **Atmosphere:** Disable video ambient lighting/cinematic glow canvas.
 
 ### 2. 📐 Layout & Player Ergonomics
+* **In-Player Playback Speed Controller:** Dedicated speed button (e.g. `1.0×`) integrated directly into YouTube's player control bar (`.ytp-right-controls`). Clicking opens a compact acrylic popover slider for seamless real-time speed adjustments (`0.1×` to `16.0×`), quick preset chips (`0.5×` to `16.0×`), step increment/decrement buttons (`−`/`+`), and instant reset without interrupting playback.
 * **Video Grid Columns:** Dynamically scale YouTube's video grid to 2, 3, 4, 5, or 6 columns using native layout variables (`--ytd-rich-grid-items-per-row`).
 * **Compact Spacing:** Tighten card margins and thumbnail padding for high-density browsing.
 * **Persistent Sidebar:** Automatically collapse or adjust the width of the left navigation guide.
 * **Distraction-Free Mode:** Center the video player and eliminate sidebars, recommendations, comments, and notification badges for pure focus.
-* **Full-Range Playback Speed:** Configure default playback speed from 0.1x to 16.0x with quick presets and strict or flexible enforcement.
 * **Mouse Wheel Volume Control:** Adjust video volume in 5% steps simply by scrolling over the HTML5 player.
 
 ### 3. 🔍 Content Filtering (Channels, Keywords, Durations, Watched)

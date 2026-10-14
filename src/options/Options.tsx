@@ -7,7 +7,7 @@ import {
   KeywordFilterRule,
 } from '../types';
 import { StorageManager } from '../shared/storage';
-import { DEFAULT_USER_SETTINGS, clampPlaybackSpeed } from '../shared/defaults';
+import { DEFAULT_USER_SETTINGS } from '../shared/defaults';
 import { Toggle } from '../components/Toggle';
 import {
   LucideIcon,
@@ -46,15 +46,13 @@ const SECTIONS: NavSection[] = [
   { id: 'sec-visibility', label: 'Interface & Shell', icon: Eye },
   { id: 'sec-shorts', label: 'Shorts & Recommendations', icon: Compass },
   { id: 'sec-filters', label: 'Content Filters & Watched', icon: Filter },
-  { id: 'sec-player', label: 'Video Player & Speed', icon: PlayCircle },
+  { id: 'sec-player', label: 'Video Player Controls', icon: PlayCircle },
   { id: 'sec-controls', label: 'Controls & Density', icon: Sliders },
   { id: 'sec-ads', label: 'Ad Blocking & Sponsored', icon: ShieldAlert },
   { id: 'sec-appearance', label: 'Appearance & Themes', icon: Palette },
   { id: 'sec-custom-rules', label: 'Custom CSS Rules', icon: FileCode },
   { id: 'sec-backup', label: 'Presets & Backup', icon: Download },
 ];
-
-const SPEED_PRESETS = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 8.0, 16.0];
 
 export const Options: React.FC = () => {
   const [settings, setSettings] = useState<UserSettings | null>(null);
@@ -1527,108 +1525,29 @@ export const Options: React.FC = () => {
           </div>
         </section>
 
-        {/* SECTION 5: VIDEO PLAYER & PLAYBACK SPEED */}
+        {/* SECTION 5: VIDEO PLAYER CONTROLS */}
         <section id="sec-player" className="settings-section">
           <div className="section-header">
             <div className="section-title-group">
               <PlayCircle size={16} className="section-icon" />
-              <h2 className="section-title">Video Player & Playback Speed</h2>
+              <h2 className="section-title">Video Player Controls</h2>
             </div>
-            <span className="section-tag">Fine Playback Control</span>
+            <span className="section-tag">Player Ergonomics</span>
           </div>
 
           <div className="card">
-            <div className="speed-controller-header">
-              <div>
-                <h3 className="card-title">Full-Range Playback Speed (0.1x – 16.0x)</h3>
-                <p className="card-description">
-                  Set precise default playback speeds beyond YouTube&rsquo;s standard 2.0x limit.
-                </p>
-              </div>
-              <div className="speed-display-badge">
-                <span className="speed-current-val font-mono">
-                  {(activePreset.layout.defaultPlaybackSpeed ?? 1.0).toFixed(2)}x
-                </span>
-                <button
-                  className="btn btn-secondary btn-sm"
-                  onClick={() =>
-                    updateActivePreset((p) => {
-                      p.layout.defaultPlaybackSpeed = 1.0;
-                    })
-                  }
-                  title="Reset speed to 1.0x"
-                >
-                  Reset 1.0x
-                </button>
-              </div>
-            </div>
+            <h3 className="card-title">In-Player Playback Speed Controller</h3>
+            <p className="card-description">
+              Playback speed is controlled directly inside the YouTube video player via the dedicated speed button on the control bar. Click the speed button (e.g. 1.0×) in any video to open the interactive slider and adjust speed from 0.1× to 16.0× in real time.
+            </p>
 
-            {/* Slider and Exact Numeric Input */}
-            <div className="speed-slider-row">
-              <input
-                type="range"
-                min="0.1"
-                max="16.0"
-                step="0.05"
-                className="speed-range-slider"
-                value={activePreset.layout.defaultPlaybackSpeed ?? 1.0}
-                onChange={(e) => {
-                  const val = clampPlaybackSpeed(parseFloat(e.target.value));
-                  updateActivePreset((p) => {
-                    p.layout.defaultPlaybackSpeed = val;
-                  });
-                }}
-              />
-              <div className="speed-number-input-group">
-                <input
-                  type="number"
-                  min="0.1"
-                  max="16.0"
-                  step="0.05"
-                  className="input-text speed-number-input font-mono"
-                  value={activePreset.layout.defaultPlaybackSpeed ?? 1.0}
-                  onChange={(e) => {
-                    const val = clampPlaybackSpeed(parseFloat(e.target.value) || 1.0);
-                    updateActivePreset((p) => {
-                      p.layout.defaultPlaybackSpeed = val;
-                    });
-                  }}
-                />
-                <span className="speed-unit-suffix">x</span>
-              </div>
-            </div>
-
-            {/* Quick Speed Preset Buttons */}
-            <div className="speed-presets-container">
-              <span className="input-label">Quick Presets:</span>
-              <div className="pill-group speed-pill-row">
-                {SPEED_PRESETS.map((spd) => {
-                  const isCurrent = Math.abs((activePreset.layout.defaultPlaybackSpeed ?? 1.0) - spd) < 0.01;
-                  return (
-                    <button
-                      key={spd}
-                      className={`pill-btn speed-pill ${isCurrent ? 'active' : ''}`}
-                      onClick={() =>
-                        updateActivePreset((p) => {
-                          p.layout.defaultPlaybackSpeed = spd;
-                        })
-                      }
-                    >
-                      {spd}x
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Enforcement Toggle */}
             <div className="toggle-row" style={{ marginTop: '16px', borderTop: '1px solid var(--border)', paddingTop: '12px' }}>
               <div className="toggle-info">
-                <h4>Strictly Enforce Default Playback Speed</h4>
+                <h4>Remember & Enforce Playback Speed</h4>
                 <p>
                   {activePreset.layout.enforcePlaybackSpeed
-                    ? 'Strict mode enabled: Automatically re-applies your preferred speed whenever a video loads, navigates, or attempts to reset.'
-                    : 'Flexible mode: Applies speed on initial load but respects manual speed changes made via YouTube player menu.'}
+                    ? 'Strict enforcement active: Automatically applies your chosen speed when opening new videos and prevents YouTube from resetting it.'
+                    : 'Standard mode: Remembers your selected speed for new videos while respecting manual changes during playback.'}
                 </p>
               </div>
               <Toggle
@@ -1639,17 +1558,8 @@ export const Options: React.FC = () => {
                     p.layout.enforcePlaybackSpeed = val;
                   })
                 }
-                ariaLabel="Strictly enforce default playback speed"
+                ariaLabel="Remember & enforce playback speed"
               />
-            </div>
-
-            {/* Audio Limit Notice Callout */}
-            <div className="audio-notice-callout">
-              <Info size={14} className="audio-notice-icon" />
-              <p>
-                <b>Chromium Audio Engine Note:</b> The HTML5 video player supports hardware-accelerated playback up to 16.0x smoothly.
-                However, Chromium mutes audio playback or drops audio frames at speeds exceeding 4.0x due to platform audio pitch-preservation limits.
-              </p>
             </div>
           </div>
         </section>

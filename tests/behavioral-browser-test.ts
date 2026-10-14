@@ -119,8 +119,13 @@ const MOCK_YOUTUBE_HTML = `<!DOCTYPE html>
         <div id="columns" class="ytd-watch-flexy">
           <div id="primary" class="ytd-watch-flexy">
             <div id="player">
-              <div id="movie_player" class="html5-video-player">
+              <div id="movie_player" class="html5-video-player" style="position: relative; width: 640px; height: 360px;">
                 <video class="html5-main-video" style="width: 640px; height: 360px;"></video>
+                <div class="ytp-chrome-bottom" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 48px;">
+                  <div class="ytp-right-controls" style="display: flex; justify-content: flex-end; align-items: center; height: 100%; padding-right: 12px;">
+                    <button class="ytp-button ytp-settings-button" aria-label="Settings" style="width: 36px; height: 36px;">⚙</button>
+                  </div>
+                </div>
               </div>
             </div>
             <div id="comments" class="ytd-watch-flexy">Comments Section (1,420 Comments)</div>
@@ -266,20 +271,24 @@ async function runRealBrowserBehavioralSuite() {
     const ytPage: Page = await browser.newPage();
     await ytPage.setRequestInterception(true);
     ytPage.on('request', (req) => {
-      const url = req.url();
-      if (url.startsWith('https://www.youtube.com')) {
-        req.respond({
-          status: 200,
-          contentType: 'text/html; charset=utf-8',
-          body: MOCK_YOUTUBE_HTML,
-        });
-      } else {
-        req.continue();
+      try {
+        const url = req.url();
+        if (url.startsWith('https://www.youtube.com')) {
+          req.respond({
+            status: 200,
+            contentType: 'text/html; charset=utf-8',
+            body: MOCK_YOUTUBE_HTML,
+          });
+        } else {
+          req.continue();
+        }
+      } catch {
+        // already handled
       }
     });
 
     const startNav = Date.now();
-    await ytPage.goto('https://www.youtube.com/', { waitUntil: 'domcontentloaded' });
+    await ytPage.goto('https://www.youtube.com/', { waitUntil: 'domcontentloaded', timeout: 15000 });
     await new Promise((r) => setTimeout(r, 600));
 
     // Verify content script injection
@@ -1012,6 +1021,187 @@ async function runRealBrowserBehavioralSuite() {
       `playbackRate=${adSpeedState.rate}`,
       adSpeedState.rate === 2.5,
       Date.now() - startAdSpeed
+    );
+
+    // 19C. Test In-Player Speed Controller in Real Browser (Control Bar Button & Popover)
+    console.log('\n🎛️ Step 19C: Testing In-Player Speed Controller (Control Bar & Popover Slider)...');
+    const startInPlayerSpeed = Date.now();
+    await ytPage.bringToFront();
+
+    // 1. Check speed button injected into right controls
+    const buttonState = await ytPage.evaluate(() => {
+      const btn = document.querySelector('.ytp-right-controls .ytp-unchained-speed-btn') as HTMLButtonElement | null;
+      const label = btn?.querySelector('.ytp-unchained-speed-label')?.textContent;
+      const ariaLabel = btn?.getAttribute('aria-label');
+      return {
+        exists: Boolean(btn),
+        label,
+        ariaLabel,
+      };
+    });
+
+    recordTest(
+      'In-Player Speed Button Injected into Control Bar',
+      'In-Player Speed Controller',
+      'Speed button present in .ytp-right-controls with 2.5× label',
+      `exists=${buttonState.exists}, label=${buttonState.label}`,
+      buttonState.exists && buttonState.label === '2.5×',
+      Date.now() - startInPlayerSpeed
+    );
+
+    // 2. Click speed button to open acrylic popover
+    const startOpenPopover = Date.now();
+    await ytPage.evaluate(() => {
+      const btn = document.querySelector('.ytp-right-controls .ytp-unchained-speed-btn') as HTMLButtonElement | null;
+      btn?.click();
+    });
+    await new Promise((r) => setTimeout(r, 250));
+
+    const popoverOpenState = await ytPage.evaluate(() => {
+      const popover = document.querySelector('#movie_player .yt-unchained-speed-popover') as HTMLElement | null;
+      const title = popover?.querySelector('.yt-unchained-popover-title')?.textContent;
+      const badge = popover?.querySelector('.yt-unchained-speed-badge')?.textContent;
+      const slider = popover?.querySelector('.yt-unchained-range-slider') as HTMLInputElement | null;
+      const chips = popover?.querySelectorAll('.yt-unchained-chip').length;
+      return {
+        exists: Boolean(popover),
+        title,
+        badge,
+        sliderVal: slider ? parseFloat(slider.value) : null,
+        chipCount: chips || 0,
+      };
+    });
+
+    recordTest(
+      'In-Player Speed Popover Opens with Sliders and Preset Chips',
+      'In-Player Speed Controller',
+      'Popover rendered inside #movie_player with title, badge (2.5×), and 10 chips',
+      `exists=${popoverOpenState.exists}, title=${popoverOpenState.title}, badge=${popoverOpenState.badge}, chips=${popoverOpenState.chipCount}`,
+      popoverOpenState.exists && popoverOpenState.badge === '2.5×' && popoverOpenState.chipCount >= 10,
+      Date.now() - startOpenPopover
+    );
+
+    // 3. Test Chip Selection: click 3.0× preset chip
+    const startChipTest = Date.now();
+    await ytPage.evaluate(() => {
+      const chip3x = document.querySelector('.yt-unchained-chip[data-speed="3"]') as HTMLButtonElement | null;
+      chip3x?.click();
+    });
+    await new Promise((r) => setTimeout(r, 200));
+
+    const chipState = await ytPage.evaluate(() => {
+      const video = document.querySelector('video') as HTMLVideoElement | null;
+      const badge = document.querySelector('.yt-unchained-speed-badge')?.textContent;
+      const btnLabel = document.querySelector('.ytp-unchained-speed-label')?.textContent;
+      const chip3x = document.querySelector('.yt-unchained-chip[data-speed="3"]');
+      const isActive = chip3x?.classList.contains('active');
+      return {
+        videoRate: video ? video.playbackRate : null,
+        badge,
+        btnLabel,
+        isActive,
+      };
+    });
+
+    recordTest(
+      'Preset Chip Real-Time Speed Application',
+      'In-Player Speed Controller',
+      'Clicking 3.0× chip updates video playbackRate to 3.0, badge to 3.0×, and button label to 3.0×',
+      `rate=${chipState.videoRate}, badge=${chipState.badge}, btnLabel=${chipState.btnLabel}, active=${chipState.isActive}`,
+      chipState.videoRate === 3.0 && chipState.badge === '3.0×' && chipState.btnLabel === '3.0×' && Boolean(chipState.isActive),
+      Date.now() - startChipTest
+    );
+
+    // 4. Test Step Controls: click step decrement (−) then increment (+)
+    const startStepTest = Date.now();
+    await ytPage.evaluate(() => {
+      const decBtn = document.querySelector('.yt-unchained-step-btn') as HTMLButtonElement | null;
+      decBtn?.click();
+    });
+    await new Promise((r) => setTimeout(r, 150));
+
+    const stepDecState = await ytPage.evaluate(() => {
+      const video = document.querySelector('video') as HTMLVideoElement | null;
+      return video ? video.playbackRate : null;
+    });
+
+    await ytPage.evaluate(() => {
+      const btns = document.querySelectorAll('.yt-unchained-step-btn');
+      const incBtn = btns[1] as HTMLButtonElement | null;
+      incBtn?.click();
+    });
+    await new Promise((r) => setTimeout(r, 150));
+
+    const stepIncState = await ytPage.evaluate(() => {
+      const video = document.querySelector('video') as HTMLVideoElement | null;
+      const badge = document.querySelector('.yt-unchained-speed-badge')?.textContent;
+      return {
+        rate: video ? video.playbackRate : null,
+        badge,
+      };
+    });
+
+    recordTest(
+      'Step Controls Increment and Decrement Speed Accurately',
+      'In-Player Speed Controller',
+      'Decrements to 2.9, then increments back to 3.0',
+      `decRate=${stepDecState}, incRate=${stepIncState.rate}, badge=${stepIncState.badge}`,
+      stepDecState === 2.9 && stepIncState.rate === 3.0 && stepIncState.badge === '3.0×',
+      Date.now() - startStepTest
+    );
+
+    // 5. Test Outside Click to Dismiss Popover
+    const startDismiss = Date.now();
+    await ytPage.evaluate(() => {
+      document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+    });
+    await new Promise((r) => setTimeout(r, 200));
+
+    const dismissState = await ytPage.evaluate(() => {
+      const popover = document.querySelector('.yt-unchained-speed-popover');
+      return Boolean(popover);
+    });
+
+    recordTest(
+      'Outside Click Dismisses Popover',
+      'In-Player Speed Controller',
+      'Clicking outside removes popover from player DOM',
+      `popoverStillPresent=${dismissState}`,
+      !dismissState,
+      Date.now() - startDismiss
+    );
+
+    // 6. Test Keyboard Escape to Close Popover
+    const startEscape = Date.now();
+    await ytPage.bringToFront();
+    await ytPage.evaluate(() => {
+      const btn = document.querySelector('.ytp-right-controls .ytp-unchained-speed-btn') as HTMLButtonElement | null;
+      btn?.click();
+    });
+    await new Promise((r) => setTimeout(r, 200));
+
+    await ytPage.evaluate(() => {
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+    });
+    await new Promise((r) => setTimeout(r, 200));
+
+    const escapeState = await ytPage.evaluate(() => {
+      const popover = document.querySelector('.yt-unchained-speed-popover');
+      const btn = document.querySelector('.ytp-right-controls .ytp-unchained-speed-btn');
+      const isFocused = document.activeElement === btn;
+      return {
+        popoverOpen: Boolean(popover),
+        btnFocused: isFocused,
+      };
+    });
+
+    recordTest(
+      'Escape Key Dismisses Popover and Restores Focus',
+      'In-Player Speed Controller',
+      'Escape key closes popover and focuses speed button',
+      `popoverOpen=${escapeState.popoverOpen}, btnFocused=${escapeState.btnFocused}`,
+      !escapeState.popoverOpen && escapeState.btnFocused,
+      Date.now() - startEscape
     );
 
     // 20. Live YouTube Site Smoke Test

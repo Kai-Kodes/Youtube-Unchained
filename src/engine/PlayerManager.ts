@@ -1,5 +1,6 @@
 import { UserSettings, PresetProfile } from '../types';
 import { clampPlaybackSpeed } from '../shared/defaults';
+import { InPlayerSpeedController } from './InPlayerSpeedController';
 
 export class PlayerManager {
   private static listenersAttached = false;
@@ -19,6 +20,7 @@ export class PlayerManager {
     this.preAdMuted = null;
     this.updateSettings(settings);
     this.attachGlobalListeners();
+    InPlayerSpeedController.init(settings);
   }
 
   /**
@@ -28,6 +30,7 @@ export class PlayerManager {
     if (!settings.masterEnabled) {
       this.activePreset = null;
       this.stopAdInterval();
+      InPlayerSpeedController.updateSettings(settings);
       return;
     }
 
@@ -38,6 +41,7 @@ export class PlayerManager {
     this.applyPlaybackSpeed();
     this.checkAutoExpandDescription();
     this.startAdInterval();
+    InPlayerSpeedController.updateSettings(settings);
   }
 
   /**
@@ -50,6 +54,7 @@ export class PlayerManager {
     this.applyPlaybackSpeed(true);
     this.checkAutoExpandDescription();
     this.startAdInterval();
+    InPlayerSpeedController.onPageNavigate();
   }
 
   /**
@@ -195,9 +200,10 @@ export class PlayerManager {
         }
       }
     } else {
-      // User manually altered playback speed via YouTube native player menu
+      // User manually altered playback speed via YouTube native player menu or player controller
       this.manualSpeedOverride = true;
     }
+    InPlayerSpeedController.syncSpeed(video.playbackRate);
   }
 
   /**
@@ -228,6 +234,8 @@ export class PlayerManager {
         this.isSettingSpeed = false;
       }
     }
+
+    InPlayerSpeedController.syncSpeed(video.playbackRate);
   }
 
   /**
