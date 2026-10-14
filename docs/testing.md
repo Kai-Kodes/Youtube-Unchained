@@ -368,4 +368,36 @@ Detailed findings, feature matrix, and architectural taxonomy were persisted in 
 - **TypeScript Compilation:** Strict check (`tsc --noEmit`) passing with **0 errors**.
 - **Real-Browser View Rendering:** All 10 settings sections navigated successfully, popup quick toggles verified, and 0 console/page errors detected.
 
+---
+
+## 9. Apple-Inspired UI/UX Redesign & Verification
+
+### Design Skill Integration
+The redesign was engineered strictly adhering to the installed **Apple design skill** (`apple-design` at `/home/redsheronin/.agents/skills/apple-design/SKILL.md`), drawing from Apple Human Interface Guidelines and WWDC Design principles:
+1. **Clarity:** Clear, concise control labels with secondary information subordinated in muted text.
+2. **Deference:** Content and customizations remain the hero. All gratuitous glowing neon borders, arbitrary badges, and decorative cards were removed in favor of clean surfaces.
+3. **Materials & Depth:** Acrylic sidebar (`rgba(19, 21, 26, 0.75)`) and sticky dashboard header (`rgba(13, 15, 18, 0.78)`) with `backdrop-filter: blur(20px) saturate(180%)`.
+4. **Inset Grouped Lists:** Settings panels organized as Apple rounded containers (`border-radius: 13px`) with hairline dividers (`1px solid rgba(255, 255, 255, 0.05)`) between items.
+5. **Apple Switch Geometry:** Toggles use proportional rounded tracks, Apple System Green (`#34c759`) active states, physical solid white thumbs with layered drop shadows, and fluid critically-damped spring curves (`cubic-bezier(0.16, 1, 0.3, 1)`).
+6. **Optical Typography:** SF Pro system font stack with optical tracking (`-0.015em` on headings, `0` on body copy, `+0.04em` on uppercase captions).
+7. **Tactile Press Feedback:** Subtle physical compression feedback (`:active { transform: scale(0.97); }`) on all buttons, segmented pills, and controls.
+8. **Zero Emoji Enforcement:** Absolute prohibition of emojis across the entire UI, replaced with monochrome, stroke-consistent Lucide SVG icons.
+
+### Artifacts & Visual Evidence Captured
+1. **Popup UI (`apple-popup.png`):** Compact, scannable layout fitting within 350px × 620px without vertical scroll clipping, with side-by-side action buttons.
+2. **Dashboard Overview (`apple-dashboard-overview.png`):** Clean single-page settings document with macOS System Settings sidebar and translucent sticky search header.
+3. **Visibility & Shell (`apple-visibility.png`):** Inset grouped lists for Atmosphere and Header navigation buttons.
+4. **Content Filtering (`apple-content-filtering.png`):** Sanitized form inputs, duration fields, and segmented display mode selector.
+5. **Video Player & Speed (`apple-player-speed.png`):** Full-range slider (0.1x to 16.0x) with Apple thumb geometry and segmented speed pills.
+6. **Ad Blocking & Privacy (`apple-ads.png`):** Layered protection breakdown with clean status checkmarks and offline boundary callout.
+7. **Custom Rules & Picker (`apple-custom-rules.png`):** Empty state illustration and rule creation input row.
+8. **Presets, Backup & Diagnostics (`apple-backup-diagnostics.png`):** Preset card list with active profile indicator, JSON backup/restore, and system diagnostics.
+9. **Narrow Viewport (`apple-narrow-viewport.png`):** 800px width test verifying zero horizontal overflow and clean header wrapping.
+
+### Verification Matrix
+- **TypeScript Typecheck (`npm run lint`):** **0 errors**.
+- **Vitest Unit Test Suite (`npm test`):** **64 / 64 PASS (100%)**.
+- **Extension Production Build (`npm run build`):** **Built cleanly into `dist/`**.
+- **Vivaldi Behavioral Browser Suite (`npm run test:browser`):** **32 / 32 PASS (100%)**.
+
 

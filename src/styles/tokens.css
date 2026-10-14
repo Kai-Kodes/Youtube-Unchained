@@ -1,70 +1,131 @@
 /**
- * YouTube Unchained — Shared Design Tokens
- * Aesthetic: Developer Tool / Engineering Precision (Linear/Raycast inspired)
+ * YouTube Unchained — Apple-Inspired Shared Design Tokens
+ * Grounded in Apple Human Interface Guidelines and WWDC Design Principles:
+ * - Clarity, Deference, Consistency, Hierarchy, Purposeful Motion
+ * - Translucent materials, optical typography, critically-damped spring curves
  */
 
 :root {
-  /* Color Palette - Neutral Charcoal & Graphite */
-  --bg-primary: #121418;
-  --bg-secondary: #171a21;
-  --bg-tertiary: #1e222b;
-  --bg-card: #1a1d25;
-  --bg-card-hover: #212530;
-  --bg-input: #111317;
-  --bg-subtle: #15181f;
-  --bg-surface-elevated: #242934;
+  /* Surfaces & Materials (Dark Mode Apple System Baseline) */
+  --bg-primary: #0d0f12;
+  --bg-secondary: #13151a;
+  --bg-tertiary: #191c23;
+  --bg-card: rgba(255, 255, 255, 0.038);
+  --bg-card-hover: rgba(255, 255, 255, 0.065);
+  --bg-card-active: rgba(255, 255, 255, 0.095);
+  --bg-input: rgba(0, 0, 0, 0.3);
+  --bg-subtle: rgba(255, 255, 255, 0.025);
+  --bg-surface-elevated: #1e222b;
+  --bg-glass: rgba(13, 15, 18, 0.78);
+  --bg-glass-sidebar: rgba(19, 21, 26, 0.75);
 
-  /* Text Hierarchy */
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-  --text-inverse: #121418;
+  /* Translucency & Blur Filters */
+  --backdrop-blur: blur(20px) saturate(180%);
+  --backdrop-blur-sm: blur(12px) saturate(160%);
 
-  /* Accent Color (Restrained YouTube Crimson Red) */
-  --accent: #e50914;
-  --accent-hover: #b80710;
-  --accent-light: #f87171;
-  --accent-subtle: rgba(229, 9, 20, 0.12);
-  --accent-glow: rgba(229, 9, 20, 0.22);
+  /* Typography Hierarchy (Apple SF Pro Spec) */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "JetBrains Mono", monospace;
 
-  /* Borders & Dividers */
-  --border: #282d38;
-  --border-light: #373e4d;
-  --border-subtle: #1f232c;
-  --border-focus: #e50914;
+  /* Text Colors (Apple Vibrancy Scale) */
+  --text-primary: #f5f5f7;
+  --text-secondary: rgba(235, 235, 245, 0.68);
+  --text-muted: rgba(235, 235, 245, 0.42);
+  --text-tertiary: rgba(235, 235, 245, 0.28);
+  --text-inverse: #000000;
+
+  /* Optical Tracking */
+  --tracking-tight: -0.015em;
+  --tracking-tighter: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.03em;
+  --tracking-wider: 0.06em;
+
+  /* Apple System Palette */
+  --apple-blue: #0a84ff;
+  --apple-green: #34c759;
+  --apple-red: #ff453a;
+  --apple-orange: #ff9f0a;
+  --apple-purple: #bf5af2;
+  --apple-gray: #8e8e93;
+
+  /* Extension Brand & Interactive Accents */
+  --accent: #ff453a;
+  --accent-hover: #ff5c52;
+  --accent-light: #ff6961;
+  --accent-subtle: rgba(255, 69, 58, 0.14);
+  --accent-interactive: #0a84ff;
+  --accent-interactive-hover: #409cff;
+  --accent-interactive-subtle: rgba(10, 132, 255, 0.14);
+
+  /* Borders, Dividers & Hairlines */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.14);
+  --border-subtle: rgba(255, 255, 255, 0.045);
+  --border-focus: #0a84ff;
+  --divider: rgba(255, 255, 255, 0.06);
+
+  /* Shadows (Depth & Elevation) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+  --shadow-inset-top: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
 
   /* Semantic Feedback */
-  --success: #10b981;
-  --success-subtle: rgba(16, 185, 129, 0.12);
-  --warning: #f59e0b;
-  --warning-subtle: rgba(245, 158, 11, 0.12);
-  --danger: #ef4444;
-  --danger-subtle: rgba(239, 68, 68, 0.12);
+  --success: #34c759;
+  --success-subtle: rgba(52, 199, 89, 0.14);
+  --warning: #ff9f0a;
+  --warning-subtle: rgba(255, 159, 10, 0.14);
+  --danger: #ff453a;
+  --danger-subtle: rgba(255, 69, 58, 0.14);
 
-  /* Typography */
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
-
-  /* Radii */
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
+  /* Apple Corner Radii Scale */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 9px;
+  --radius-lg: 13px;
+  --radius-xl: 18px;
   --radius-full: 9999px;
 
-  /* Snappy Transitions */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-fast: 120ms;
-  --duration-normal: 180ms;
+  /* Motion & Physical Springs (Apple WWDC 2018 Fluid Interfaces) */
+  /* Damping 1.0 (critically damped, zero overshoot) */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-instant: 80ms;
+  --duration-fast: 140ms;
+  --duration-normal: 220ms;
+  --duration-smooth: 320ms;
 }
 
+/* Accessibility: Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Accessibility: Reduced Transparency */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --bg-card: #17191f;
+    --bg-glass: #0d0f12;
+    --bg-glass-sidebar: #13151a;
+    --backdrop-blur: none;
+    --backdrop-blur-sm: none;
+  }
+}
+
+/* Accessibility: High Contrast */
+@media (prefers-contrast: more) {
+  :root {
+    --border: rgba(255, 255, 255, 0.3);
+    --border-subtle: rgba(255, 255, 255, 0.2);
+    --text-secondary: rgba(255, 255, 255, 0.9);
+    --text-muted: rgba(255, 255, 255, 0.7);
   }
 }

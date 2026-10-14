@@ -448,14 +448,15 @@ export const Popup: React.FC = () => {
           className="btn-primary"
           disabled={!settings.masterEnabled || !isYouTubeTab}
           onClick={handleStartPicker}
+          title="Pick & Hide Element on Page"
         >
-          <Crosshair size={14} />
-          <span>Pick & Hide Element on Page</span>
+          <Crosshair size={13} />
+          <span>Pick Element</span>
         </button>
 
-        <button className="btn-secondary" onClick={handleOpenOptions}>
-          <Sliders size={14} />
-          <span>Open Settings Dashboard</span>
+        <button className="btn-secondary" onClick={handleOpenOptions} title="Open Settings Dashboard">
+          <Sliders size={13} />
+          <span>Settings</span>
         </button>
       </div>
     </div>
