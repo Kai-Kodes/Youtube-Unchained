@@ -1,0 +1,39 @@
+# Ignore all top-level files and directories in home directory by default
+/*
+
+# Whitelist YouTube Unchained project files and directories
+!/.gitignore
+!/package.json
+!/package-lock.json
+!/tsconfig.json
+!/vitest.config.ts
+!/options.html
+!/popup.html
+!/README.md
+!/CHANGELOG.md
+!/feature-audit.md
+!/reference-gap-analysis.md
+!/docs/
+!/public/
+!/scripts/
+!/src/
+!/tests/
+
+# Dependencies and build outputs
+node_modules/
+dist/
+coverage/
+*.log
+
+# Environment and secrets
+.env
+.env.*
+*.local
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,0 +1,70 @@
+/**
+ * YouTube Unchained — Shared Design Tokens
+ * Aesthetic: Developer Tool / Engineering Precision (Linear/Raycast inspired)
+ */
+
+:root {
+  /* Color Palette - Neutral Charcoal & Graphite */
+  --bg-primary: #121418;
+  --bg-secondary: #171a21;
+  --bg-tertiary: #1e222b;
+  --bg-card: #1a1d25;
+  --bg-card-hover: #212530;
+  --bg-input: #111317;
+  --bg-subtle: #15181f;
+  --bg-surface-elevated: #242934;
+
+  /* Text Hierarchy */
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --text-inverse: #121418;
+
+  /* Accent Color (Restrained YouTube Crimson Red) */
+  --accent: #e50914;
+  --accent-hover: #b80710;
+  --accent-light: #f87171;
+  --accent-subtle: rgba(229, 9, 20, 0.12);
+  --accent-glow: rgba(229, 9, 20, 0.22);
+
+  /* Borders & Dividers */
+  --border: #282d38;
+  --border-light: #373e4d;
+  --border-subtle: #1f232c;
+  --border-focus: #e50914;
+
+  /* Semantic Feedback */
+  --success: #10b981;
+  --success-subtle: rgba(16, 185, 129, 0.12);
+  --warning: #f59e0b;
+  --warning-subtle: rgba(245, 158, 11, 0.12);
+  --danger: #ef4444;
+  --danger-subtle: rgba(239, 68, 68, 0.12);
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+
+  /* Radii */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+
+  /* Snappy Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 120ms;
+  --duration-normal: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

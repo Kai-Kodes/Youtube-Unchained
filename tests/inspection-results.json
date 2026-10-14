@@ -1,0 +1,200 @@
+{
+  "improveYouTube": {
+    "title": "ImprovedTube",
+    "categories": [
+      "General",
+      "Player",
+      "Appearance",
+      "Shortcuts",
+      "Channel",
+      "Playlist",
+      "Themes",
+      "Blocklist",
+      "Analyser"
+    ],
+    "switchesCount": 0,
+    "selectsCount": 0
+  },
+  "enhancer": {
+    "title": "Enhancer for YouTube™",
+    "tabs": [
+      {
+        "text": "Playback speed",
+        "target": "speed"
+      },
+      {
+        "text": "Volume",
+        "target": "volume"
+      },
+      {
+        "text": "Mouse",
+        "target": "mouse"
+      },
+      {
+        "text": "Keyboard shortcuts",
+        "target": "shortcuts"
+      },
+      {
+        "text": "Backup",
+        "target": "backup"
+      },
+      {
+        "text": "Playback quality",
+        "target": "quality"
+      },
+      {
+        "text": "Video codecs and formats",
+        "target": "codecs"
+      },
+      {
+        "text": "Pop-up player",
+        "target": "pop-up-player"
+      },
+      {
+        "text": "Mini player",
+        "target": "mini-player"
+      },
+      {
+        "text": "Autoplay",
+        "target": "autoplay"
+      },
+      {
+        "text": "Controls",
+        "target": "controls"
+      },
+      {
+        "text": "Custom script",
+        "target": "script"
+      },
+      {
+        "text": "Theme",
+        "target": "theme"
+      },
+      {
+        "text": "Appearance",
+        "target": "appearance"
+      },
+      {
+        "text": "Cinema mode",
+        "target": "cinema"
+      }
+    ],
+    "sections": [
+      "Playback speed",
+      "Volume",
+      "Mouse",
+      "Keyboard shortcuts",
+      "Backup",
+      "Playback quality",
+      "Video codecs and formats",
+      "Pop-up player",
+      "Mini player",
+      "Autoplay",
+      "Controls",
+      "Custom script",
+      "Theme",
+      "Appearance",
+      "Cinema mode"
+    ],
+    "sampleLabels": [
+      "Default playback speed:",
+      "Override default playback speeds",
+      "Speed variation when rotating the mouse wheel or when clicking the speed buttons “-” and “+”:",
+      "Control the playback speed with the mouse wheel when the mouse cursor is over the video player and the “Control” key (Ctrl) is pressed",
+      "Only when the right mouse button is pressed",
+      "Default volume level:",
+      "Volume booster level:",
+      "Automatically boost the volume",
+      "Control the volume level with the mouse wheel when hovering over the video player with the mouse cursor",
+      "Only when the right mouse button is pressed",
+      "Volume variation when rotating the mouse wheel:",
+      "Reverse the mouse wheel direction to control the playback speed and the volume level",
+      "Automatically select a playback quality",
+      "Videos:",
+      "Playlists:",
+      "Pop-up player and embedded videos:",
+      "Select a different playback quality when entering the full screen mode",
+      "Videos (full screen):",
+      "Playlists (full screen):",
+      "Pop-up player and embedded videos (full screen):",
+      "Switch back to the previous playback quality when exiting the full screen mode",
+      "Force the use of standard frame rates formats (24, 25, 30 FPS) instead of high frame rates formats (48, 50, 60 FPS)",
+      "Force the use of the MP4 format and the AVC codec (H.264) instead of the WebM format and the VP9 codec (maximum resolution: 1080p60 HD)",
+      "Pop-up player size:",
+      "Launch a mini player when scrolling down to read comments",
+      "Mini player size:",
+      "Mini player position:",
+      "Disable autoplay",
+      "Prevent videos loaded in background tabs from automatically playing",
+      "Prevent videos loaded in the foreground tab from automatically playing as well"
+    ]
+  },
+  "tweaks": {
+    "title": "Options | Tweaks for YouTube",
+    "headers": [
+      "Tweaks for YouTube",
+      "► 3.93.0 24/09/2026",
+      "Settings",
+      "Exp. Features",
+      "Interaction Zones",
+      "Keyboard Shortcuts",
+      "Custom CSS And JS",
+      "Import / Export",
+      "About",
+      "Settings"
+    ],
+    "labels": [
+      "Patron Access Code",
+      "Extension UI - Theme",
+      "Extension UI - Layout",
+      "Mouse Control",
+      "Ignore mouse wheel actions while video is paused",
+      "Ignore mouse wheel actions while video is paused",
+      "Mouse Control - Global ModKey",
+      "Mouse Control - Element",
+      "Mouse Control - Ignore elements on top of video",
+      "Mouse Control - Ignore elements on top of video",
+      "Mouse Control - Ignore subtitles (disables position change)",
+      "Mouse Control - Ignore subtitles (disables position change)",
+      "Mouse Control - Disable double-click on custom actions",
+      "Mouse Control - Disable double-click on custom actions",
+      "Mouse Control - Enable on miniplayer",
+      "Mouse Control - Enable on miniplayer",
+      "Jump To Chapter Start",
+      "Toggle Fullscreen with Middle Mouse Button",
+      "Toggle Fullscreen with Middle Mouse Button",
+      "Instant Play/Pause",
+      "Instant Play/Pause",
+      "Player Controls",
+      "Default",
+      "Default",
+      "Progress Bar",
+      "Progress Bar",
+      "Default + Progress Bar",
+      "Default + Progress Bar",
+      "Persistent Progress Bar",
+      "Persistent Progress Bar",
+      "Persistent Default",
+      "Persistent Default",
+      "Player Controls - Base Time On Current Playback Rate",
+      "Player Controls - Base Time On Current Playback Rate",
+      "Player Controls - Background"
+    ]
+  },
+  "tweaksPopup": {
+    "popupLabels": [
+      "Tweaks for YouTube► 3.93.0 24/09/2026",
+      "► 3.93.0 24/09/2026",
+      "Mouse Control",
+      "Player Controls",
+      "Hide Player Controls",
+      "Mono Mix",
+      "HP Filter",
+      "Become a Patron and get access to Patrons-only features and Experimental features!",
+      "Become a Patron and get access to Patrons-only features and Experimental features!",
+      "Extension UI - Theme",
+      "About",
+      "About"
+    ]
+  }
+}
