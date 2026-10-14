@@ -49,20 +49,30 @@
   --apple-purple: #bf5af2;
   --apple-gray: #8e8e93;
 
+  /* YouTube Signature Brand Identity & Primary Accents */
+  --yt-red: #ff0000;
+  --yt-red-hover: #cc0000;
+  --yt-red-active: #b30000;
+  --yt-red-subtle: rgba(255, 0, 0, 0.12);
+  --yt-red-subtle-hover: rgba(255, 0, 0, 0.18);
+  --yt-red-border: rgba(255, 0, 0, 0.32);
+  --yt-red-glow: rgba(255, 0, 0, 0.25);
+  --yt-red-text: #ff4d4d; /* High-contrast readable red for text and badges against dark backgrounds */
+
   /* Extension Brand & Interactive Accents */
-  --accent: #ff453a;
-  --accent-hover: #ff5c52;
-  --accent-light: #ff6961;
-  --accent-subtle: rgba(255, 69, 58, 0.14);
-  --accent-interactive: #0a84ff;
-  --accent-interactive-hover: #409cff;
-  --accent-interactive-subtle: rgba(10, 132, 255, 0.14);
+  --accent: var(--yt-red);
+  --accent-hover: var(--yt-red-hover);
+  --accent-light: var(--yt-red-text);
+  --accent-subtle: var(--yt-red-subtle);
+  --accent-interactive: var(--yt-red);
+  --accent-interactive-hover: var(--yt-red-hover);
+  --accent-interactive-subtle: var(--yt-red-subtle);
 
   /* Borders, Dividers & Hairlines */
   --border: rgba(255, 255, 255, 0.08);
   --border-light: rgba(255, 255, 255, 0.14);
   --border-subtle: rgba(255, 255, 255, 0.045);
-  --border-focus: #0a84ff;
+  --border-focus: var(--yt-red);
   --divider: rgba(255, 255, 255, 0.06);
 
   /* Shadows (Depth & Elevation) */

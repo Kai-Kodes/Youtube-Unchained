@@ -40,7 +40,7 @@ function updateBadge(enabled: boolean) {
   if (typeof chrome.action !== 'undefined') {
     if (enabled) {
       chrome.action.setBadgeText({ text: 'ON' });
-      chrome.action.setBadgeBackgroundColor({ color: '#0284c7' });
+      chrome.action.setBadgeBackgroundColor({ color: '#ff0000' });
     } else {
       chrome.action.setBadgeText({ text: 'OFF' });
       chrome.action.setBadgeBackgroundColor({ color: '#64748b' });

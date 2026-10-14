@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const distPath = path.resolve(__dirname, '../dist');
 const defaultArtifactsDir = '/home/redsheronin/.gemini/antigravity-cli/brain/8088107f-dd2e-409b-ae4b-71886e712f8d';
 const outDir = fs.existsSync(defaultArtifactsDir) ? defaultArtifactsDir : path.resolve(__dirname, '../dist/screenshots');
 if (!fs.existsSync(outDir)) {

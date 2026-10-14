@@ -80,7 +80,7 @@ export class ElementPicker {
         }
 
         .hud-badge {
-          background: #0284c7;
+          background: #ff0000;
           color: #ffffff;
           padding: 2px 8px;
           border-radius: 6px;
@@ -105,8 +105,8 @@ export class ElementPicker {
 
         .highlight-box {
           position: fixed;
-          border: 2px solid #06b6d4;
-          background: rgba(6, 182, 212, 0.18);
+          border: 2px solid #ff0000;
+          background: rgba(255, 0, 0, 0.18);
           border-radius: 4px;
           pointer-events: none;
           display: none;
@@ -120,12 +120,12 @@ export class ElementPicker {
           left: 0;
           transform: translateY(-6px);
           background: #0f172a;
-          color: #38bdf8;
+          color: #ff4d4d;
           font-family: monospace;
           font-size: 11px;
           padding: 4px 8px;
           border-radius: 4px;
-          border: 1px solid #0284c7;
+          border: 1px solid rgba(255, 0, 0, 0.4);
           white-space: nowrap;
           pointer-events: none;
           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
@@ -190,7 +190,7 @@ export class ElementPicker {
         }
 
         .form-input:focus, .form-select:focus {
-          border-color: #38bdf8;
+          border-color: #ff0000;
           outline: none;
         }
 
@@ -201,7 +201,7 @@ export class ElementPicker {
           border-radius: 6px;
           font-family: monospace;
           font-size: 12px;
-          color: #38bdf8;
+          color: #ff4d4d;
           word-break: break-all;
         }
 
@@ -226,7 +226,7 @@ export class ElementPicker {
         }
 
         .btn-save {
-          background: #0284c7;
+          background: #ff0000;
           border: none;
           color: #ffffff;
           padding: 8px 18px;
@@ -236,7 +236,7 @@ export class ElementPicker {
           font-weight: 500;
         }
         .btn-save:hover {
-          background: #0369a1;
+          background: #cc0000;
         }
       </style>
 

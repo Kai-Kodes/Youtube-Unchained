@@ -43,7 +43,7 @@ body {
 }
 
 .logo-badge {
-  background: linear-gradient(135deg, #ff453a 0%, #d32f2f 100%);
+  background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
   color: #ffffff;
   font-family: var(--font-mono);
   font-weight: 700;
@@ -51,7 +51,7 @@ body {
   padding: 2px 6px;
   border-radius: var(--radius-xs);
   letter-spacing: var(--tracking-wide);
-  box-shadow: 0 1px 3px rgba(255, 69, 58, 0.35);
+  box-shadow: 0 1px 3px rgba(255, 0, 0, 0.35);
 }
 
 .title {
@@ -96,7 +96,7 @@ body {
 }
 
 .btn-icon:focus-visible {
-  outline: 2px solid var(--apple-blue);
+  outline: 2px solid var(--border-focus);
   outline-offset: 1px;
 }
 
@@ -210,8 +210,8 @@ body {
 }
 
 .preset-select:focus-visible {
-  border-color: var(--apple-blue);
-  outline: 2px solid var(--apple-blue);
+  border-color: var(--border-focus);
+  outline: 2px solid var(--border-focus);
   outline-offset: 1px;
 }
 
@@ -237,8 +237,9 @@ body {
 /* --- Playback Speed Segmented Bar --- */
 .speed-tag {
   font-size: 11px;
-  color: var(--apple-blue);
-  background: rgba(10, 132, 255, 0.12);
+  color: var(--yt-red-text);
+  background: var(--yt-red-subtle);
+  border: 1px solid var(--yt-red-border);
   padding: 1px 6px;
   border-radius: var(--radius-xs);
   font-weight: 600;
@@ -401,8 +402,9 @@ body {
 .filtered-counter {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--apple-blue);
-  background: rgba(10, 132, 255, 0.12);
+  color: var(--yt-red-text);
+  background: var(--yt-red-subtle);
+  border: 1px solid var(--yt-red-border);
   padding: 1px 6px;
   border-radius: var(--radius-xs);
   font-weight: 600;
@@ -427,7 +429,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: var(--apple-red);
+  background: var(--yt-red);
   color: #ffffff;
   border: none;
   border-radius: var(--radius-md);
@@ -436,17 +438,20 @@ body {
   font-weight: 600;
   letter-spacing: var(--tracking-tight);
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(255, 69, 58, 0.35);
-  transition: filter var(--duration-fast) var(--ease-spring),
+  box-shadow: 0 1px 3px rgba(255, 0, 0, 0.35);
+  transition: background-color var(--duration-fast) var(--ease-spring),
+              filter var(--duration-fast) var(--ease-spring),
               transform var(--duration-instant) var(--ease-spring),
               opacity var(--duration-fast) ease;
 }
 
 .btn-primary:hover:not(:disabled) {
-  filter: brightness(1.08);
+  background: var(--yt-red-hover);
+  filter: brightness(1.04);
 }
 
 .btn-primary:active:not(:disabled) {
+  background: var(--yt-red-active);
   transform: scale(0.98);
 }
 
@@ -486,6 +491,6 @@ body {
 
 .btn-primary:focus-visible,
 .btn-secondary:focus-visible {
-  outline: 2px solid var(--apple-blue);
+  outline: 2px solid var(--border-focus);
   outline-offset: 1px;
 }

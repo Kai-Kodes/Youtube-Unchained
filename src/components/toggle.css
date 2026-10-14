@@ -144,9 +144,9 @@
   transform: translateX(12px) scale(0.92);
 }
 
-/* Keyboard Focus Ring (Apple Accessibility Blue) */
+/* Keyboard Focus Ring */
 .yt-toggle-input:focus-visible + .yt-toggle-track {
-  outline: 2px solid var(--apple-blue, #0a84ff);
+  outline: 2px solid var(--border-focus, #ff0000);
   outline-offset: 2px;
 }
 
